@@ -5,7 +5,7 @@ import {Server} from 'socket.io'
 import {createServer} from 'node:http'
 
 const PORT = process.env.PORT || 3000; 
-const path_public_files = path.join(process.cwd(), '/src/public')
+const path_public_files = path.join(process.cwd(), '/src/client/public')
 
 const app = express();
 const server = createServer(app);

@@ -1,0 +1,38 @@
+# Dependencias
+node_modules
+
+# Directorio de dependencias locales
+/node_modules/
+
+# Logs
+npm-debug.log*
+
+# Pruebas y cobertura
+coverage
+
+# Archivos temporales
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pnpm-error.log*
+
+# IDEs y editores
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Proyectos de Typescript
+tsconfig.tsbuildinfo
+
+# Paquetes binarios
+*.bin

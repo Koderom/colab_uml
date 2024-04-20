@@ -5,6 +5,7 @@ import engine from 'ejs-layout'
 import {Server} from 'socket.io'
 import {createServer} from 'node:http'
 import {routes} from './routes/routes.js'
+import SocketConnectionManager from './socket/SocketConnectionHandle.js'
 
 const PORT = process.env.PORT || 3000; 
 const path_public_files = path.join(process.cwd(), '/src/client/public')
@@ -15,17 +16,17 @@ const io = new Server(server);
 
 app.use(logger('dev'));
 app.use(express.static(path_public_files));
+app.use(routes);
+
 app.set('view engine', 'ejs');
 app.set('views', path_public_files  + '/pages');
 app.engine('ejs', engine.__express);
 
-io.on('connection', async (socekt) => {
-    console.log("conectado");
-})
-
-app.use(routes);
+SocketConnectionManager(io);
+// io.on('connection', async (socket) => {
+//     SocketConnectionManager.updateState(io, socket);
+// })
 
 server.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
-    console.log(`public files: ${path_public_files}`);
 }) 

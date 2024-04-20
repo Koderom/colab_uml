@@ -23,9 +23,6 @@ app.set('views', path_public_files  + '/pages');
 app.engine('ejs', engine.__express);
 
 SocketConnectionManager(io);
-// io.on('connection', async (socket) => {
-//     SocketConnectionManager.updateState(io, socket);
-// })
 
 server.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);

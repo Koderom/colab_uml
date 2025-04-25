@@ -1,0 +1,55 @@
+<%+ extend('./Layouts/MainLayout') %>
+<%+ section('Styles')%>
+    <style>
+        .modal-form{
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            align-items: start;
+            justify-content: center;
+            background: rgba(173, 173, 173, 0.56);
+        }
+        .modal-form>.form{
+            padding: 2rem;
+            margin-top: 5rem;
+            width: 40rem;
+            height: auto;
+            border-radius: 1rem;
+            background: white;
+        }
+    </style>
+<%+ endSection%>
+
+<%+ section('Navbar')%>
+    <%- include('NavBarLayout', {idEmpleado: idEmpleado}) %> 
+<%+ endSection%>
+
+<%+ section('Content')  %>
+<div class="container bg-light" style="margin-top: 5rem; width: 100%; height: 100%;">
+    <h3>Diagramas</h3>
+        <div class="row">
+            <% diagramas.forEach( function(diagrama){ %>
+                <div class="col-sm-3 card m-1 p-0">
+                    <div class="card-body ">
+                        <h5 class="card-title"> <%= diagrama.nombre %></h5>
+                    </div>
+                </div>
+            <% }); %>
+
+            <button class="col-auto  card m-1 p-0" type="button" id="btn_nuevo_diagrama">
+                <div class="card-body ">
+                    <h5 class="card-title">
+                         Nuevo
+                         <i class="fas fa-plus-square"></i>
+                    </h5>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <%- include('../DiagramaPage/DiagramaCreate', {idProyecto}) %>
+<%+ endSection %>
+<%+ section('Scripts')%>
+    <script type="module" src="./pages/DiagramaPage/DiagramaPage.js"></script>
+<%+ endSection%>

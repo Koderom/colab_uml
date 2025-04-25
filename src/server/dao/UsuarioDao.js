@@ -1,7 +1,7 @@
-export default class Usuario {
-
-    constructor(pool) {
-        this.pool = pool;
+export default class UsuarioDao {
+    
+    constructor(connection) {
+        this.connection = connection;
     }
 
     async createUsuario(Usuario) {
@@ -15,7 +15,7 @@ export default class Usuario {
                 Usuario.password,
                 Usuario.idEmpleado
             ];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
 
             if (response.rowCount > 0) return response.rows[0].id;
             throw new Error("Usuario no insertado");
@@ -32,7 +32,7 @@ export default class Usuario {
                 WHERE d.id = $1 
             `;
             const params = [idUsuario];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
             if (response.rowCount > 0) return response.rows[0];
             else return null;
         } catch (error) {
@@ -49,7 +49,7 @@ export default class Usuario {
                 where ep.idEmpleado = $1
             `;
             const params = [idEmpleado];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
             if (response.rowCount > 0) return response.rows;
             else return [];
         } catch (error) {
@@ -67,7 +67,7 @@ export default class Usuario {
                 WHERE d.id = $1 
             `;
             const params = [idUsuario];
-            const response = await pool.query(query, params);
+            const response = await connection.query(query, params);
             return response.rowCount > 0
         } catch (error) {
             throw error;
@@ -82,7 +82,7 @@ export default class Usuario {
                 WHERE d.login = $1 
             `;
             const params = [login];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
             return response.rowCount > 0
         } catch (error) {
             throw error;
@@ -101,7 +101,7 @@ export default class Usuario {
                 Usuario.descripcion,
                 Usuario.id
             ];
-            const response = await pool.query(query, params);
+            const response = await connection.query(query, params);
 
             if (response.rowCount > 0) return response.rows[0].id;
             else return null;
@@ -126,7 +126,7 @@ export default class Usuario {
                 SELECT * FROM usuario WHERE usuario.login = $1
             `;
             const params = [name];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
             if(response.rowCount > 0) return response.rows[0];
 
             else throw new Error(`usuario: ${name} no encontrado`);

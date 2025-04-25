@@ -1,0 +1,36 @@
+  <%+ extend('./Layouts/MainLayout') %>
+
+<%+ section('Styles')%>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+    }
+    main {
+        flex-grow: 1;
+    }
+    #studio {
+        height: 100%;
+    }
+    .gjs-block {
+      width: auto;
+      height: auto;
+      min-height: auto;
+    }
+
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css"/>
+
+<%+ endSection%>
+
+<%+ section('Content')  %>
+  <div id="gjs" style="height:0px; overflow:hidden"></div>
+  <div id="blocks"></div>
+<%+ endSection %>
+
+<%+ section('Scripts')%>
+  <script src="https://unpkg.com/grapesjs"></script>
+  <script type="module" src="./pages/EditorPage/EditorPage.js"></script>
+<%+ endSection%>

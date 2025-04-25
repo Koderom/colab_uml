@@ -1,19 +1,22 @@
-export default class Proyecto{
-    constructor(pool){
-        this.pool = pool;
+import { pool } from '../database/Connection.js';
+
+export default class ProyectoDao{
+    constructor(connection) {
+        this.connection = connection;
     }
     
     async createProyecto(Proyecto){
         try {
             const query = `
-                INSERT INTO proyecto(titulo,descripcion)
-                VALUES ($1, $2) RETURNING id;            
+                INSERT INTO proyecto(titulo,descripcion, idview)
+                VALUES ($1, $2, $3) RETURNING id;            
             `;
             const params = [
                 Proyecto.titulo,
-                Proyecto.descripcion
+                Proyecto.descripcion,
+                Proyecto.idEditor
             ];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
             if(response.rowCount > 0) return response.rows[0].id;
             else throw new Error("error al crear proyecto");
         } catch (error) {
@@ -30,7 +33,7 @@ export default class Proyecto{
             const params = [
                 idEmpleado, idProyecto
             ];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
 
             if(response.rowCount > 0) return response.rows[0].id;
             else throw new Error("error al asignar proyecto");
@@ -48,7 +51,7 @@ export default class Proyecto{
             const params = [
                 idEmpleado, idProyecto
             ];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
 
             return response.rowCount > 0
         } catch (error) {
@@ -65,7 +68,7 @@ export default class Proyecto{
                 WHERE d.id = $1 
             `;
             const params = [idProyecto];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
             if(response.rowCount > 0) return response.rows[0];
             else return null;
         } catch (error) {
@@ -82,15 +85,13 @@ export default class Proyecto{
                 where ep.idEmpleado = $1
             `;
             const params = [idEmpleado];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
             if(response.rowCount > 0) return response.rows;
             else return [];
         } catch (error) {
             throw error;
         }
     }
-
-    
 
     async existProyecto(idProyecto){
         try {
@@ -100,7 +101,7 @@ export default class Proyecto{
                 WHERE d.id = $1 
             `;
             const params = [idProyecto];
-            const response = await pool.query(query, params);
+            const response = await connection.query(query, params);
             return response.rowCount > 0
         } catch (error) {
             throw error;
@@ -119,7 +120,7 @@ export default class Proyecto{
                 Proyecto.descripcion,
                 Proyecto.id
             ];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
 
             if(response.rowCount > 0) return response.rows[0].id;
             else return null;

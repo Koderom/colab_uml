@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- graficos uml con jsuml2 -->
-    <link type='text/css' rel='stylesheet' href='/libraries/jsuml2/css/UDStyle.css' media='screen' />
+    <!-- <link type='text/css' rel='stylesheet' href='/libraries/jsuml2/css/UDStyle.css' media='screen' />
     <script type='text/javascript' src='/libraries/jsuml2/UDCore.js'></script>
-    <script type='text/javascript' src='./libraries/jsuml2/UDModules.js'></script>
+    <script type='text/javascript' src='./libraries/jsuml2/UDModules.js'></script> -->
     <!-- bootstrap -->
     <link rel="stylesheet" href="/libraries/bootstrap-5.3.3/css/bootstrap.css">
     <script src="/libraries/bootstrap-5.3.3/js/bootstrap.js"></script>
@@ -58,13 +58,14 @@
             /* Scrollable contents if viewport is shorter than content. */
         }
     </style>
+    <%+ yield('Styles') %>
 
     <title>ColabUML</title>
 </head>
 <body>
     <header>
         <%+ yield('Sidebar') %>
-        <%+ yield('Navbar') %>        
+        <%+ yield('Navbar') %>
     </header>
     <%+ yield('Content') %>
     <%+ yield('Scripts')  %>

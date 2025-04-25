@@ -1,6 +1,6 @@
-export default class Empleado{
-    constructor(pool){
-        this.pool = pool;
+export default class EmpleadoDao{
+    constructor(connection){
+        this.connection = connection;
     }
 
     async createEmpleado(Empleado){
@@ -13,7 +13,7 @@ export default class Empleado{
                 Empleado.nombre,
                 Empleado.cargo
             ];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
 
             if(response.rowCount > 0) return response.rows[0].id;
             else return null;
@@ -30,7 +30,7 @@ export default class Empleado{
                 WHERE d.id = $1 
             `;
             const params = [idEmpleado];
-            const response = await pool.query(query, params);
+            const response = await connection.query(query, params);
             if(response.rowCount > 0) return response.rows[0];
             else return null;
         } catch (error) {
@@ -47,7 +47,7 @@ export default class Empleado{
                 WHERE ep.idProyecto = $1
             `;
             const params = [idProyecto];
-            const response = await this.pool.query(query, params);
+            const response = await this.connection.query(query, params);
             if(response.rowCount > 0) return response.rows[0];
             else throw new Error('empleado no encontrado');
         } catch (error) {
@@ -63,7 +63,7 @@ export default class Empleado{
                 WHERE d.id = $1 
             `;
             const params = [idEmpleado];
-            const response = await pool.query(query, params);
+            const response = await connection.query(query, params);
             return response.rowCount > 0
         } catch (error) {
             throw error;
@@ -82,7 +82,7 @@ export default class Empleado{
                 Empleado.cargo,
                 Empleado.id
             ];
-            const response = await pool.query(query, params);
+            const response = await connection.query(query, params);
 
             if(response.rowCount > 0) return response.rows[0].id;
             else return null;

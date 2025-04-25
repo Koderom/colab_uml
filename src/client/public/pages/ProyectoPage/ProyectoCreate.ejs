@@ -1,0 +1,22 @@
+<div class="modal-form" style="display: none;" id="nuevo_proyecto_form">
+    <div class="form">
+        <form >
+            <h3>Nuevo proyecto</h3>
+            <div class="row mb-3">
+              <label for="inputEmail3" class="col-sm-2 col-form-label" >Nombre</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputEmail3" name="nombre">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label" >Descripcion</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPassword3" name="descripcion">
+              </div>
+            </div>
+            <input type="hidden" name="idEmpleado" value="<%= idEmpleado %>">
+            <button type="submit" class="btn btn-primary" id="btn_nuevo_proyecto_crear">Crear</button>
+            <button type="button" class="btn btn-secondary " id="btn_nuevo_proyecto_salir">Atras</button>
+          </form>
+    </div>  
+</div>

@@ -18,8 +18,6 @@ EditorService.getEditor = async (idEditor) => {
     const response = await fetch(url, options);
     if(!response.ok) throw new Error("WARN", response.status);
     else window.location.href = url;
-    // const html = await response.text();
-    // document.documentElement.innerHTML = html;
 }
 
 export {EditorService}

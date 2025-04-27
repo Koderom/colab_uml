@@ -14,8 +14,8 @@
         height: 100%;
     }
     .gjs-block {
-      width: auto;
-      height: auto;
+      width: fit-content !important;
+      height: fit-content !important;
       min-height: auto;
     }
 
@@ -26,11 +26,16 @@
 <%+ endSection%>
 
 <%+ section('Content')  %>
-  <div id="gjs" style="height:0px; overflow:hidden"></div>
-  <div id="blocks"></div>
+  <div id="gjs" style="height:0px; overflow:hidden" data-id-Editor="<%= editor.id %>"></div>
+  <!-- <div id="blocks" style="width: 100%; height: 350px; overflow-y: scroll;"></div> -->
 <%+ endSection %>
 
 <%+ section('Scripts')%>
+  <script>
+    var editorData = <%- JSON.stringify(editor.jsondata) %>;
+  </script>
+  
+  <script src="https://unpkg.com/grapesjs-blocks-basic"></script>
   <script src="https://unpkg.com/grapesjs"></script>
   <script type="module" src="./pages/EditorPage/EditorPage.js"></script>
 <%+ endSection%>

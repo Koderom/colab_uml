@@ -9,6 +9,7 @@ import SocketConnectionManager from './socket/SocketConnectionHandle.js'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import Auth from './middleware/Auth.js'
+
 const PORT = process.env.PORT || 3000; 
 const path_public_files = path.join(process.cwd(), '/src/client/public')
 console.log(process.env.PORT);

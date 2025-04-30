@@ -1,6 +1,7 @@
 import Proyecto from '../models/Proyecto.js';
 import { pool } from '../database/Connection.js';
 import ProyectoUseCase from '../use_cases/ProyectoUseCase.js';
+import EditorUseCase from '../use_cases/EditorUseCase.js';
 export const ProyectoController = {};
 
 ProyectoController.createProyecto = async (req, res) => {

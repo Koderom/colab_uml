@@ -1,7 +1,8 @@
-const {OpenAI} = require("openai");
+import { OpenAI } from "openai";
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    base_url:"https://openrouter.ai/api/v1",
+    api_Key: process.env.OPENAI_API_KEY,
 });
 
 
@@ -50,6 +51,76 @@ ChatGPT.generarMusicaPresentacion = async (cancion, comentario) => {
     }
 }
 
+ChatGPT.processImage = async (prompt, base64Image) => {
+    try{
+        const response = await openai.chat.completions.create({
+            model: 'gpt-4o',
+            messages: [
+                {
+                    role: "user",
+                    content: [
+                        { type: "text", text: prompt },
+                        {
+                            type: "image_url",
+                            image_url: `data:image/jpeg;base64,${base64Image}`,
+                        },
+                    ],
+                },
+            ],
+        });
+        console.log(response);
+        return response.output_text;
+    }catch(error){
+        return error.message;
+    }
+}
+
+ChatGPT.queryTextFromOR = async (prompt, texto) => {
+    try {
+        console.log("---------PROMPT-------------->"+prompt);
+        console.log("---------TEXTO-------------->"+texto);
+
+        const chatCompletion = await fetch(
+            "https://openrouter.ai/api/v1/chat/completions",
+            {
+                method: 'POST',
+                headers: {
+                    "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "model": "openai/gpt-4o-mini",
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": prompt
+                                },
+                                {
+                                    "type": "text",
+                                    "text": texto
+                                }
+                                ]
+                            }
+                        ]
+                  })
+            },
+            
+        )
+        console.log("-----------RESPONSE------------>")
+        console.log(chatCompletion);
+        const data =  await chatCompletion.json();
+        console.log("-----------DATA------------->")
+        console.log(data);
+        const response = data.choices[0].message.content;
+        console.log(response);
+        return response;
+    } catch (error) {
+        return error;
+    }
+}
 ChatGPT.query = async (prompt, texto) => {
     try{
         const chatCompletion = await openai.chat.completions.create({
@@ -74,4 +145,4 @@ ChatGPT.query = async (prompt, texto) => {
     }
 }
 
-module.exports = {ChatGPT};
+export default ChatGPT;

@@ -1,0 +1,15 @@
+* { box-sizing: border-box; }
+body { margin: 0; }
+.gjs-row { display: flex; justify-content: flex-start; align-items: stretch; flex-wrap: nowrap; padding: 10px; }
+.gjs-cell { min-height: 75px; flex-grow: 1; flex-basis: 100%; }
+.navbar { background-color: rgb(34, 34, 34); color: rgb(221, 221, 221); min-height: 50px; width: 100%; }
+.navbar-container { max-width: 950px; margin: 0 auto; width: 95%; }
+.navbar-items-c { display: inline-block; float: right; }
+.navbar-menu-link { color: inherit; text-decoration: none; padding: 10px 15px; display: inline-block; }
+.navbar-burger { width: 45px; display: none; float: right; cursor: pointer; }
+.navbar-burger-line { background-color: white; margin: 5px 0; }
+@media (max-width: 768px) {
+    .navbar-items-c { display: none; width: 100%; }
+    .navbar-burger { display: block; }
+    .navbar-menu-link { display: block; }
+}

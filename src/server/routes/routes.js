@@ -21,6 +21,7 @@ routes.post('/proyecto/create', ProyectoController.createProyecto)
 routes.post('/proyecto/unirse', ProyectoController.unirseProyecto)
 //Editor routes
 routes.get('/editor', EditorController.getEditor)
+routes.post('/editor/download', EditorController.editorDownload)
 //Diagrama routes
 // routes.get('/diagramas', DiagramaController.getDiagramas)
 // routes.post('/diagrama/create', DiagramaController.createDiagrama);

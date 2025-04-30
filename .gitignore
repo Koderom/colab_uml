@@ -36,4 +36,4 @@ tsconfig.tsbuildinfo
 
 # Paquetes binarios
 *.bin
-.env
+./.env
